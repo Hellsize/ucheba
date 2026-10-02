@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Учебный Портал — Hellsize/ucheba</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f3ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f19;
+      color: #f1f5f9;
+    }
+    
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-glow {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-glow:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.25);
+    }
+
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col bg-grid-pattern antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP NAVBAR -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="./" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-purple-500 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-xl tracking-tight text-white group-hover:text-brand-100 transition-colors">УЧЕБА.HUB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 font-bold border border-brand-500/30">
+              v2.0
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 font-medium">Портал учебных дисциплин &bull; Hellsize/ucheba</p>
+        </div>
+      </a>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-3">
+        <button id="instructions-modal-btn" class="px-4 py-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-code-commit text-brand-400"></i>
+          <span class="hidden sm:inline">Как установить на GitHub</span>
+        </button>
+
+        <a href="https://github.com/Hellsize/ucheba" target="_blank" class="px-4 py-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-brand-600/25 flex items-center gap-2">
+          <i class="fa-brands fa-github text-sm"></i>
+          <span>GitHub Репозиторий</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+    <!-- HERO HEADER BANNER -->
+    <section class="relative rounded-3xl overflow-hidden glass-panel p-8 sm:p-10 border border-slate-800">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold">
+          <i class="fa-solid fa-sparkles text-amber-400"></i>
+          Интерактивная база знаний и тренажёры
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          Учебные предметы <span class="bg-gradient-to-r from-brand-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">в одном месте</span>
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+          Изучайте конспекты, выполняйте практические задания и отслеживайте свой прогресс по дисциплинам в удобном интерактивном формате (Теория &rarr; Практика).
+        </p>
+      </div>
+
+      <!-- STATS DASHBOARD BAR -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-800/80">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-1">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Всего предметов</div>
+          <div class="text-2xl font-black text-white" id="total-courses-count">7</div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-1">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Прогресс обучения</div>
+          <div class="text-2xl font-black text-emerald-400" id="overall-completion-pct">0%</div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-1">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Пройдено тем</div>
+          <div class="text-2xl font-black text-brand-400" id="completed-topics-count">0</div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-1">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Статус сайта</div>
+          <div class="text-2xl font-black text-emerald-400 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Online
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER & SEARCH CONTROL BAR -->
+    <section class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <!-- Category Pills -->
+      <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto" id="category-pills">
+        <button data-cat="all" class="cat-pill active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white shadow-lg shadow-brand-600/30">
+          Все предметы
+        </button>
+        <button data-cat="stem" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700">
+          <i class="fa-solid fa-atom mr-1 text-sky-400"></i> STEM & Точные
+        </button>
+        <button data-cat="hum" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700">
+          <i class="fa-solid fa-book-open mr-1 text-amber-400"></i> Гуманитарные
+        </button>
+        <button data-cat="gen" class="cat-pill px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700">
+          <i class="fa-solid fa-shapes mr-1 text-emerald-400"></i> Общие
+        </button>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative w-full sm:w-72">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="course-search-input" placeholder="Поиск предмета..." class="w-full bg-slate-900/90 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+      </div>
+    </section>
+
+    <!-- COURSES CARDS GRID -->
+    <section>
+      <div id="courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically injected course cards -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL INSTRUCTIONS FOR GITHUB PAGES -->
+  <div id="github-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-slate-800 shadow-2xl space-y-6">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-lg">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Инструкция по установке файла</h3>
+            <p class="text-xs text-slate-400">Как сделать эту страницу главной на домене /ucheba/</p>
+          </div>
+        </div>
+        <button id="close-modal-btn" class="text-slate-400 hover:text-white transition-colors p-2">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 font-mono font-bold text-[10px]">ШАГ 1</span>
+          <p class="font-medium text-white">Сохраните этот файл как <code class="text-brand-300 font-mono">index.html</code></p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 font-mono font-bold text-[10px]">ШАГ 2</span>
+          <p class="font-medium text-white">Положите его в САМЫЙ КОРЕНЬ репозитория <code class="text-brand-300 font-mono">ucheba</code> на GitHub (рядом с папками fizika, fizra и т.д.).</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+          <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 font-mono font-bold text-[10px]">ШАГ 3</span>
+          <p class="font-medium text-white">Сделайте Commit. Через 1 минуту главная страница станет доступна по адресу:</p>
+          <a href="https://hellsize.github.io/ucheba/" target="_blank" class="text-brand-400 font-mono font-bold hover:underline block pt-1">
+            https://hellsize.github.io/ucheba/
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button id="close-modal-btn-2" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl text-xs transition-all">
+          Понятно
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-slate-950/50 py-8 mt-12 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 Hellsize / ucheba. Все материалы подготовлены для удобного изучения.</p>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://github.com/Hellsize/ucheba" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+        <a href="./fizika/" class="hover:text-white transition-colors">Физика</a>
+        <a href="./historyRussia/" class="hover:text-white transition-colors">История</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Array of Subject Folders in Hellsize/ucheba repository */
+    const COURSES_DATA = [
+      {
+        id: 'fizika',
+        title: 'Физика',
+        folder: 'fizika',
+        path: './fizika/',
+        icon: 'fa-atom',
+        category: 'stem',
+        badgeText: 'STEM',
+        gradient: 'from-sky-500 via-blue-600 to-indigo-600',
+        bgGlow: 'rgba(2, 132, 199, 0.15)',
+        description: 'Механика, электромагнетизм, оптика, колебания, волны и лабораторные работы с задачами.'
+      },
+      {
+        id: 'historyRussia',
+        title: 'История России',
+        folder: 'historyRussia',
+        path: './historyRussia/',
+        icon: 'fa-landmark',
+        category: 'hum',
+        badgeText: 'Гуманитарный',
+        gradient: 'from-amber-500 via-orange-600 to-red-600',
+        bgGlow: 'rgba(217, 119, 6, 0.15)',
+        description: 'Ключевые вехи развития Российского государства, исторические личности, даты и события.'
+      },
+      {
+        id: 'informatika',
+        title: 'Информатика',
+        folder: 'informatika',
+        path: './informatika/',
+        icon: 'fa-code',
+        category: 'stem',
+        badgeText: 'STEM',
+        gradient: 'from-emerald-500 via-teal-600 to-cyan-600',
+        bgGlow: 'rgba(16, 185, 129, 0.15)',
+        description: 'Алгоритмизация, программирование, базы данных, логика и информационные технологии.'
+      },
+      {
+        id: 'phylosovii',
+        title: 'Философия',
+        folder: 'phylosovii',
+        path: './phylosovii/',
+        icon: 'fa-brain',
+        category: 'hum',
+        badgeText: 'Гуманитарный',
+        gradient: 'from-purple-500 via-indigo-600 to-violet-600',
+        bgGlow: 'rgba(168, 85, 247, 0.15)',
+        description: 'История мировой философии, онтология, гносеология, этика и концепции бытия.'
+      },
+      {
+        id: 'russki',
+        title: 'Русский язык',
+        folder: 'russki',
+        path: './russki/',
+        icon: 'fa-pen-nib',
+        category: 'hum',
+        badgeText: 'Гуманитарный',
+        gradient: 'from-rose-500 via-pink-600 to-red-600',
+        bgGlow: 'rgba(244, 63, 94, 0.15)',
+        description: 'Орфография, пунктуация, культура речи, стилистика и нормы современного русского языка.'
+      },
+      {
+        id: 'fizra',
+        title: 'Физическая культура',
+        folder: 'fizra',
+        path: './fizra/',
+        icon: 'fa-dumbbell',
+        category: 'gen',
+        badgeText: 'Общий',
+        gradient: 'from-orange-500 via-amber-600 to-yellow-600',
+        bgGlow: 'rgba(249, 115, 22, 0.15)',
+        description: 'Теория и методика физического воспитания, основы ЗОЖ, самоконтроль и физиология.'
+      },
+      {
+        id: 'osnovirussian',
+        title: 'Основы государственности',
+        folder: 'osnovirussian',
+        path: './osnovirussian/',
+        icon: 'fa-shield-halved',
+        category: 'hum',
+        badgeText: 'Гуманитарный',
+        gradient: 'from-blue-500 via-indigo-600 to-slate-700',
+        bgGlow: 'rgba(59, 130, 246, 0.15)',
+        description: 'Цивилизационный измерение России, государственное устройство, ценности и суверенитет.'
+      }
+    ];
+
+    // State Variables
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    // DOM Elements
+    const coursesGrid = document.getElementById('courses-grid');
+    const categoryPills = document.querySelectorAll('.cat-pill');
+    const searchInput = document.getElementById('course-search-input');
+    const modal = document.getElementById('github-modal');
+    const openModalBtn = document.getElementById('instructions-modal-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const closeModalBtn2 = document.getElementById('close-modal-btn-2');
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCourses();
+      calculateProgressStats();
+      setupEventListeners();
+    });
+
+    function renderCourses() {
+      coursesGrid.innerHTML = '';
+
+      const filtered = COURSES_DATA.filter(course => {
+        const matchesCategory = activeCategory === 'all' || course.category === activeCategory;
+        const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              course.description.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        coursesGrid.innerHTML = `
+          <div class="col-span-full text-center py-12 rounded-3xl glass-panel border border-slate-800">
+            <i class="fa-solid fa-folder-open text-4xl text-slate-600 mb-3 block"></i>
+            <p class="text-sm text-slate-400 font-medium">Ни один предмет не найден по вашему запросу</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(course => {
+        // Read local progress
+        const savedProgress = JSON.parse(localStorage.getItem(`progress_${course.id}`)) || { completed: 0, total: 10 };
+        const progressPct = Math.round((savedProgress.completed / (savedProgress.total || 1)) * 100);
+
+        const card = document.createElement('div');
+        card.className = 'glass-panel rounded-3xl p-6 border border-slate-800/80 card-glow flex flex-col justify-between space-y-6 relative overflow-hidden group';
+
+        card.innerHTML = `
+          <!-- Background Subtle Gradient Accent -->
+          <div class="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br ${course.gradient} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity"></div>
+
+          <div class="space-y-4 relative z-10">
+            <!-- Card Header -->
+            <div class="flex items-start justify-between gap-3">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${course.gradient} flex items-center justify-center text-white text-2xl shadow-lg shadow-black/40">
+                <i class="fa-solid ${course.icon}"></i>
+              </div>
+
+              <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-800/90 text-slate-300 border border-slate-700">
+                ${course.badgeText}
+              </span>
+            </div>
+
+            <!-- Title & Description -->
+            <div>
+              <h3 class="text-xl font-bold text-white group-hover:text-brand-300 transition-colors">
+                ${course.title}
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                ${course.description}
+              </p>
+            </div>
+          </div>
+
+          <!-- Card Footer & Actions -->
+          <div class="space-y-4 pt-4 border-t border-slate-800/80 relative z-10">
+            
+            <!-- Local Progress Indicator -->
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-[11px] font-semibold">
+                <span class="text-slate-400">Пройдено</span>
+                <span class="text-brand-400">${progressPct}%</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r ${course.gradient} transition-all duration-500 rounded-full" style="width: ${progressPct}%"></div>
+              </div>
+            </div>
+
+            <!-- Buttons Row -->
+            <div class="grid grid-cols-1 gap-2 pt-1">
+              <a href="${course.path}" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-2 border border-slate-700/80 shadow-sm">
+                <span>Открыть курс</span>
+                <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+              </a>
+            </div>
+
+          </div>
+        `;
+
+        coursesGrid.appendChild(card);
+      });
+    }
+
+    function calculateProgressStats() {
+      document.getElementById('total-courses-count').innerText = COURSES_DATA.length;
+
+      let totalCompleted = 0;
+      COURSES_DATA.forEach(c => {
+        const prog = JSON.parse(localStorage.getItem(`progress_${c.id}`));
+        if (prog && prog.completed) {
+          totalCompleted += prog.completed;
+        }
+      });
+
+      document.getElementById('completed-topics-count').innerText = totalCompleted;
+      
+      // Calculate overall %
+      const estTotalTopics = COURSES_DATA.length * 8; // approx 8 topics per subject
+      const totalPct = Math.min(100, Math.round((totalCompleted / estTotalTopics) * 100));
+      document.getElementById('overall-completion-pct').innerText = `${totalPct}%`;
+    }
+
+    function setupEventListeners() {
+      // Category Pills Filter
+      categoryPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach(p => {
+            p.classList.remove('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-600/30');
+            p.classList.add('bg-slate-800/80', 'text-slate-300');
+          });
+
+          pill.classList.remove('bg-slate-800/80', 'text-slate-300');
+          pill.classList.add('active', 'bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-600/30');
+
+          activeCategory = pill.getAttribute('data-cat');
+          renderCourses();
+        });
+      });
+
+      // Search Filter
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderCourses();
+      });
+
+      // Modal Controls
+      openModalBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+      closeModalBtn.addEventListener('click', () => modal.classList.add('hidden'));
+      closeModalBtn2.addEventListener('click', () => modal.classList.add('hidden'));
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.add('hidden');
+      });
+    }
+  </script>
+</body>
+</html>
