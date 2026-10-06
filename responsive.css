@@ -1,0 +1,57 @@
+/* --- Универсальный мобильный адаптив --- */
+
+/* 1. Настройка базового размера и запрет вылета за края */
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  font-size: 17px !important; /* Удобный размер текста для чтения с телефона */
+  line-height: 1.6 !important;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box !important;
+}
+
+/* 2. Сбрасываем жесткую ширину контейнеров и таблиц */
+div, table, iframe, section, main, article, header, footer {
+  max-width: 100% !important;
+  width: auto !important;
+}
+
+/* 3. Адаптивные картинки и медиа */
+img, video, embed, object, svg {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 10px auto;
+}
+
+/* 4. Прокрутка для таблиц (чтобы не рвали верстку) */
+table {
+  display: block !important;
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  border-collapse: collapse;
+}
+
+/* 5. Исправление отступов и шрифтов на мобильных */
+@media (max-width: 768px) {
+  body {
+    padding: 12px 8px !important;
+  }
+  
+  h1 { font-size: 1.6rem !important; word-wrap: break-word; }
+  h2 { font-size: 1.3rem !important; word-wrap: break-word; }
+  h3 { font-size: 1.1rem !important; word-wrap: break-word; }
+  p, li, td { font-size: 1rem !important; }
+
+  /* Если на элементах стоят inline-стили с фиксированной шириной */
+  [style*="width"], [width] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
